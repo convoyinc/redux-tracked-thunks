@@ -19,6 +19,7 @@
     "prepublish": "./scripts/prepublish",
     "test:style": "./scripts/test:style",
     "test:unit": "./scripts/test:unit",
+    "test:integration": "./scripts/test:integration",
     "test": "./scripts/test"
   },
   "dependencies": {},

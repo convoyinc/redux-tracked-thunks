@@ -16,7 +16,11 @@
   // filled in manually.
   "files": [
     "src/index.ts",
-    "typings/custom/unit-test-environment.d.ts",
+    "test/env/base.ts",
+    "test/env/integration.ts",
+    "test/env/unit.ts",
+    "test/helpers/index.ts",
+    "typings/custom/test-environment.d.ts",
     "typings/main.d.ts"
   ]
 }

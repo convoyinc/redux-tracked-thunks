@@ -12,3 +12,7 @@ test:
         parallel: true
         files:
           - test/unit/**/*.ts
+    - npm run test:integration:
+        parallel: true
+        files:
+          - test/integration/**/*.ts

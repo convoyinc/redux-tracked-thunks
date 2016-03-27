@@ -3,3 +3,4 @@ set -e
 
 ./scripts/test:style
 ./scripts/test:unit
+./scripts/test:integration
