@@ -1,0 +1,37 @@
+{
+  "name": "redux-tracked-thunks",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/convoyinc/redux-tracked-thunks",
+  "bugs": "https://github.com/convoyinc/redux-tracked-thunks/issues",
+  "license": "Apache-2.0",
+  "repository": "convoyinc/redux-tracked-thunks",
+  "main": "./dist/src/index.js",
+  "typings": "./dist/src/index.d.ts",
+  "files": [
+    "dist",
+    "*.md"
+  ],
+  "scripts": {
+    "bump": "./scripts/bump",
+    "clean": "./scripts/clean",
+    "compile": "./scripts/compile",
+    "prepublish": "./scripts/prepublish",
+    "test:style": "./scripts/test:style",
+    "test:unit": "./scripts/test:unit",
+    "test": "./scripts/test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "mocha-circleci-reporter": "0.0.1",
+    "mocha-clean": "^1.0.0",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
+    "ts-node": "^0.7.1",
+    "tslint": "3.6.0",
+    "typescript": "1.8.9",
+    "typings": "0.7.9"
+  }
+}
