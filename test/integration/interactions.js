@@ -12,7 +12,7 @@ const tracked = trackedThunks.tracked;
 const interactions = new class TodoInteractions extends Interactions {
   initialState = [];
 
-  @tracked(c => c)
+  @tracked(category => category)
   add(category, text, fail = false) {
     return async (dispatch, _getState) => {
       const id = uuid.v4();
