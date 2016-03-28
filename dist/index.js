@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.reducer = exports.tracked = exports.status = exports.middleware = undefined;
+exports.reducer = exports.ACTION_FAILURE = exports.ACTION_SUCCESS = exports.ACTION_START = exports.tracked = exports.status = exports.middleware = undefined;
 
 var _middleware = require('./middleware');
 
@@ -38,4 +38,7 @@ var _interactions2 = _interopRequireDefault(_interactions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var ACTION_START = exports.ACTION_START = _interactions2.default.START;
+var ACTION_SUCCESS = exports.ACTION_SUCCESS = _interactions2.default.SUCCESS;
+var ACTION_FAILURE = exports.ACTION_FAILURE = _interactions2.default.FAILURE;
 var reducer = exports.reducer = _interactions2.default.reducer;

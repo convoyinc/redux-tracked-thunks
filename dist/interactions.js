@@ -5,11 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.TrackedThunkInteractions = undefined;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _desc, _value, _class;
 
 var _reduxInteractions = require('redux-interactions');
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -57,13 +61,42 @@ var TrackedThunkInteractions = exports.TrackedThunkInteractions = (_class = func
 
   _createClass(TrackedThunkInteractions, [{
     key: 'start',
-    value: function start(state) {}
+    value: function start(state, actionCreatorId, actionId) {
+      return this._mergeStatus(state, actionCreatorId, actionId, {
+        active: true,
+        failure: false,
+        success: false,
+        error: null
+      });
+    }
   }, {
     key: 'success',
-    value: function success(state) {}
+    value: function success(state, actionCreatorId, actionId) {
+      return this._mergeStatus(state, actionCreatorId, actionId, {
+        active: false,
+        failure: false,
+        success: true,
+        error: null
+      });
+    }
   }, {
     key: 'failure',
-    value: function failure(state) {}
+    value: function failure(state, actionCreatorId, actionId, error) {
+      return this._mergeStatus(state, actionCreatorId, actionId, {
+        active: false,
+        failure: true,
+        success: false,
+        error: error
+      });
+    }
+
+    // Helpers
+
+  }, {
+    key: '_mergeStatus',
+    value: function _mergeStatus(state, actionCreatorId, actionId, status) {
+      return _extends({}, state, _defineProperty({}, actionCreatorId, _extends({}, state[actionCreatorId], _defineProperty({}, actionId, status))));
+    }
   }]);
 
   return TrackedThunkInteractions;

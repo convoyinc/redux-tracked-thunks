@@ -7,18 +7,20 @@ import thunk from 'redux-thunk';
 import { actionsReducer, pause } from '../helpers';
 
 import * as trackedThunks from '../../src';
+const tracked = trackedThunks.tracked;
 
 const interactions = new class TodoInteractions extends Interactions {
   initialState = [];
 
-  @trackedThunks.tracked
-  add(text, fail = false) {
+  @tracked(c => c)
+  add(category, text, fail = false) {
     return async (dispatch, _getState) => {
       const id = uuid.v4();
-      dispatch(this.addLocal(id, text, true));
+      dispatch(this.addLocal(id, category, text, true));
       await pause(1);
       if (fail) {
         dispatch(this.deleteLocal(id));
+        throw new Error('failed');
       } else {
         dispatch(this.markSaved(id));
       }
@@ -26,8 +28,8 @@ const interactions = new class TodoInteractions extends Interactions {
   }
 
   @reducer
-  addLocal(state, id, text, saving = false) {
-    return [...state, {id, text, saving}];
+  addLocal(state, id, category, text, saving = false) {
+    return [...state, {id, category, text, saving}];
   }
 
   @reducer
@@ -59,7 +61,7 @@ function createStore(initialState = {}) {
   return redux.createStore(rootReducer, initialState, rootEnhancer);
 }
 
-describe(`interactions-react`, () => {
+describe(`interactions`, () => {
 
   let store;
   beforeEach(`store`, () => {
@@ -67,13 +69,35 @@ describe(`interactions-react`, () => {
   });
 
   it(`tracks successful actions`, async () => {
-    await store.dispatch(interactions.add('stuff'));
+    await store.dispatch(interactions.add('general', 'stuff'));
     expect(store.getState().actions).to.containSubset([
       {type: trackedThunks.ACTION_START},
       {type: interactions.ADD_LOCAL},
       {type: interactions.MARK_SAVED},
       {type: trackedThunks.ACTION_SUCCESS},
     ]);
+    expect(interactions.add.status('general')(store.getState())).to.containSubset({
+      active: false,
+      success: true,
+      failure: false,
+      error: null,
+    });
+  });
+
+  it(`tracks failed actions`, async () => {
+    await store.dispatch(interactions.add('general', 'stuff', true));
+    expect(store.getState().actions).to.containSubset([
+      {type: trackedThunks.ACTION_START},
+      {type: interactions.ADD_LOCAL},
+      {type: interactions.DELETE_LOCAL},
+      {type: trackedThunks.ACTION_FAILURE},
+    ]);
+    expect(interactions.add.status('general')(store.getState())).to.containSubset({
+      active: false,
+      success: false,
+      failure: true,
+      error: {message: 'failed'},
+    });
   });
 
   it(`ignores regular dispatches`, () => {
