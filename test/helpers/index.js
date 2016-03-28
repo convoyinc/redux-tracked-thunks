@@ -13,3 +13,14 @@ export function withMocha(callback) {
     withMocha(callback);
   });
 }
+
+export function actionsReducer(state = [], action) {
+  if (action.type === '@@redux/INIT') return state;
+  return [...state, action];
+}
+
+export function pause(duration) {
+  return new Promise((resolve, _reject) => {
+    setTimeout(resolve, duration);
+  });
+}
