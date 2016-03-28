@@ -66,6 +66,16 @@ describe(`interactions-react`, () => {
     store = createStore();
   });
 
+  it(`tracks successful actions`, async () => {
+    await store.dispatch(interactions.add('stuff'));
+    expect(store.getState().actions).to.containSubset([
+      {type: trackedThunks.ACTION_START},
+      {type: interactions.ADD_LOCAL},
+      {type: interactions.MARK_SAVED},
+      {type: trackedThunks.ACTION_SUCCESS},
+    ]);
+  });
+
   it(`ignores regular dispatches`, () => {
     store.dispatch({type: 'foo'});
     expect(store.getState().actions).to.eql([{type: 'foo'}]);
@@ -82,20 +92,15 @@ describe(`interactions-react`, () => {
     ]);
   });
 
-  it(`ignores untracked async thunk dispatches`, () => {
-    store.dispatch((dispatch, _getState) => {
-      return new Promise(() => {
-        dispatch({type: 'foo'});
-        dispatch({type: 'bar'});
-      });
+  it(`ignores untracked async thunk dispatches`, async () => {
+    await store.dispatch(async (dispatch, _getState) => {
+      dispatch({type: 'foo'});
+      dispatch({type: 'bar'});
     });
-
-    return Promise.resolve().then(() => {
-      expect(store.getState().actions).to.eql([
-        {type: 'foo'},
-        {type: 'bar'},
-      ]);
-    });
+    expect(store.getState().actions).to.eql([
+      {type: 'foo'},
+      {type: 'bar'},
+    ]);
   });
 
 });

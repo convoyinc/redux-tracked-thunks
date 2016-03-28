@@ -91,7 +91,7 @@ rules:
   no-trailing-spaces: 2
   one-var: [2, {initialized: 'never'}]
   operator-assignment: [2, 'always']
-  operator-linebreak: [2, 'before']
+  operator-linebreak: [2, 'before', {overrides: {'+': 'after'}}]
   quote-props: [2, 'consistent']
   # TODO: We want to allow both single (identifiers) and backticks (user-visible
   # strings), but it doesn't support that yet.
