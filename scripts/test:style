@@ -3,8 +3,8 @@ set -e
 
 FILES=("${@}")
 if [[ "${#FILES[@]}" = "0" ]]; then
-  FILES+=($(find src -name "*.ts"))
-  FILES+=($(find test -name "*.ts"))
+  FILES+=($(find src -name "*.js"))
+  FILES+=($(find test -name "*.js"))
 fi
 
-./node_modules/.bin/tslint "${FILES[@]}"
+./node_modules/.bin/eslint "${FILES[@]}"

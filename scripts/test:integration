@@ -3,7 +3,7 @@ set -e
 
 FILES=("${@}")
 if [[ "${#FILES[@]}" = "0" ]]; then
-  FILES+=($(find test/integration -name "*.ts"))
+  FILES+=($(find test/integration -name "*.js"))
 fi
 
 OPTIONS=()
@@ -16,6 +16,6 @@ fi
 
 ./node_modules/.bin/mocha \
   "${OPTIONS[@]}" \
-  --require ts-node/register \
-  --require ./test/env/integration.ts \
+  --require babel-register \
+  --require ./test/env/integration \
   "${FILES[@]}"

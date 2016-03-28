@@ -1,0 +1,141 @@
+# Base eslint rules that are applicable to all project types.
+
+parser: babel-eslint
+
+extends:
+- eslint:recommended
+
+plugins:
+- babel
+- import
+
+settings:
+  import/resolver: node
+  import/parser: babel-eslint
+
+env:
+  es6: true
+  commonjs: true
+
+rules:
+  # http://eslint.org/docs/rules/#possible-errors
+  comma-dangle: [2, 'always-multiline']
+  no-cond-assign: [2, 'always']
+  no-extra-parens: [2, 'functions']
+
+  # http://eslint.org/docs/rules/#best-practices
+  accessor-pairs: 2
+  curly: [2, 'multi-line']
+  dot-location: [2, 'property']
+  eqeqeq: [2, 'allow-null']
+  no-case-declarations: 2
+  no-empty-pattern: 2
+  no-eval: 2
+  no-extend-native: 2
+  no-extra-bind: 2
+  no-fallthrough: 2
+  no-floating-decimal: 2
+  no-implied-eval: 2
+  no-labels: 2
+  no-lone-blocks: 2
+  no-multi-spaces: [2, {exceptions: {AssignmentExpression: true, VariableDeclarator: true, ImportDeclaration: true, ObjectExpression: true} }]
+  no-native-reassign: 2
+  no-new-func: 2
+  no-new-wrappers: 2
+  no-octal-escape: 2
+  no-proto: 2
+  no-self-compare: 2
+  no-sequences: 2
+  no-unused-expressions: 2
+  no-useless-call: 2
+  no-useless-concat: 2
+  no-void: 2
+  no-with: 2
+  radix: [2, 'as-needed']
+  wrap-iife: [2, 'outside']
+  yoda: 2
+
+  # http://eslint.org/docs/rules/#variables
+  no-label-var: 2
+  no-shadow-restricted-names: 2
+  no-shadow: 2
+  no-undef-init: 2
+  no-unused-vars: [2, {args: 'all', varsIgnorePattern: '^_', argsIgnorePattern: '^_'}]
+
+  # http://eslint.org/docs/rules/#stylistic-issues
+  block-spacing: [2, 'always']
+  brace-style: [2, '1tbs']
+  camelcase: [2, {properties: 'always'}]
+  comma-spacing: [2, {before: false, after: true}]
+  comma-style: [2, 'last']
+  computed-property-spacing: [2, 'never']
+  eol-last: 2
+  func-style: [2, 'declaration', {allowArrowFunctions: true}]
+  indent: [2, 2, {SwitchCase: 1}]
+  jsx-quotes: [2, 'prefer-single']
+  key-spacing: [2, {beforeColon: false, afterColon: true, mode: 'minimum'}]
+  keyword-spacing: [2, {before: true, after: true}]
+  linebreak-style: [2, 'unix']
+  lines-around-comment: [2, {beforeBlockComment: true}]
+  max-depth: [2, 4]
+  max-len: [2, {code: 120, comments: 80, tabWidth: 2, ignoreUrls: true}]
+  max-nested-callbacks: [2, 3]
+  max-params: [2, 6]
+  no-array-constructor: 2
+  no-bitwise: 2
+  no-lonely-if: 2
+  no-multiple-empty-lines: [2, {max: 1}]
+  no-negated-condition: 2
+  no-new-object: 2
+  no-spaced-func: 2
+  no-trailing-spaces: 2
+  one-var: [2, {initialized: 'never'}]
+  operator-assignment: [2, 'always']
+  operator-linebreak: [2, 'before']
+  quote-props: [2, 'consistent']
+  # TODO: We want to allow both single (identifiers) and backticks (user-visible
+  # strings), but it doesn't support that yet.
+  # quotes: [2, 'single']
+  semi-spacing: [2, {before: false, after: true}]
+  semi: [2, 'always'] # REALLY tempted to say 'never'
+  space-before-blocks: [2, 'always']
+  space-before-function-paren: [2, 'never']
+  space-in-parens: [2, 'never']
+  space-infix-ops: 2
+  space-unary-ops: [2, {words: true, nonwords: false}]
+  spaced-comment: [2, 'always']
+
+  # http://eslint.org/docs/rules/#ecmascript-6
+  arrow-spacing: [2, {before: true, after: true}]
+  constructor-super: 2
+  no-class-assign: 2
+  no-confusing-arrow: 2
+  no-constant-condition: 2
+  no-dupe-class-members: 2
+  no-this-before-super: 2
+  no-var: 2
+  prefer-arrow-callback: 2
+  prefer-const: 2
+  prefer-spread: 2
+  prefer-template: 2
+
+  # https://github.com/babel/eslint-plugin-babel#rules
+  babel/array-bracket-spacing: [2, 'never']
+  babel/arrow-parens: [2, 'as-needed']
+  babel/generator-star-spacing: [2, 'before']
+  babel/new-cap: [2, {newIsCap: true, capIsNew: true}]
+  babel/no-await-in-loop: 2
+  # TODO: This would be ideal (so we can easily disambiguate between code blocks
+  # and object literals), but it is enforced for imports, too.
+  # babel/object-curly-spacing: [2, 'never']
+  babel/object-shorthand: [2, 'always']
+
+  # https://github.com/benmosher/eslint-plugin-import#rule-details
+  import/no-unresolved: [2, {commonjs: true}]
+  import/named: 2
+  import/default: 2
+  import/namespace: 2
+  import/no-named-as-default: 2
+  import/export: 2
+  import/no-duplicates: 2
+  import/imports-first: [2, 'absolute-first']
