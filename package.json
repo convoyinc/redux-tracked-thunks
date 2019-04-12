@@ -1,5 +1,5 @@
 {
-  "name": "redux-tracked-thunks",
+  "name": "@convoy/redux-tracked-thunks",
   "version": "1.0.0",
   "description": "",
   "homepage": "https://github.com/convoyinc/redux-tracked-thunks",
